@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.AdminMapper">
+    <insert id="insert" parameterType="com.example.springboot.entity.Admin">
+        INSERT INTO `admin`(username,password,role,name,avatar) VALUES (#{username},#{password},#{role},#{name},#{avatar})
+    </insert>
+    <update id="updateById" parameterType="com.example.springboot.entity.Admin">
+        UPDATE `admin` SET username=#{username},password=#{password},role=#{role}, name=#{name},avatar=#{avatar} WHERE id=#{id}
+    </update>
+    <select id="selectAll" resultType="com.example.springboot.entity.Admin">
+        SELECT * FROM admin
+        <where>
+            <if test="name != null">name like concat('%',#{name},'%')</if>
+        </where>
+        ORDER BY id DESC
+    </select>
+</mapper>

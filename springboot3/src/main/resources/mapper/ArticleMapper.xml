@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.ArticleMapper">
+    <insert id="insert" parameterType="com.example.springboot.entity.Article">
+        INSERT INTO `article`(title,img,description,content,time) VALUES (#{title},#{img},#{description},#{content},#{time})
+    </insert>
+    <update id="updateById" parameterType="com.example.springboot.entity.Article">
+        UPDATE `article` SET title=#{title},img=#{img},description=#{description}, content=#{content},time=#{time} WHERE id=#{id}
+    </update>
+    <select id="selectAll" resultType="com.example.springboot.entity.Article">
+        SELECT * FROM article
+        <where>
+            <if test="title != null">title like concat('%',#{title},'%')</if>
+        </where>
+        ORDER BY id DESC
+    </select>
+</mapper>
